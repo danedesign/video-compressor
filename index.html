@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:;">
+  <title>SL Video Compressor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">SL</div>
+      <div>
+        <p class="eyebrow">STACKED LEARNING · LOCAL TOOL</p>
+        <h1>Video compressor</h1>
+      </div>
+      <div class="privacy-pill"><span></span> Files stay on this computer</div>
+    </header>
+
+    <section class="intro-row">
+      <div>
+        <h2>Make your videos lighter.</h2>
+        <p>Choose an output size, keep frame timing, and export a lighter MP4.</p>
+      </div>
+      <div class="codec-chip"><span class="codec-icon">H.264</span><span>MP4 · Chromium friendly</span></div>
+    </section>
+
+    <section id="dropZone" class="drop-zone" aria-label="Drop video files here">
+      <div class="upload-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 15.5v3A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5v-3"/></svg>
+      </div>
+      <h3>Drop your videos here</h3>
+      <p>MP4, MOV, MKV, AVI, WebM and more</p>
+      <button id="addFiles" class="button button-primary">Browse videos</button>
+      <span class="drop-hint">You can add multiple files</span>
+    </section>
+
+    <section class="settings-bar" aria-label="Compression settings">
+      <div class="setting-group">
+        <label for="quality">Compression</label>
+        <select id="quality">
+          <option value="24">High quality · CRF 24</option>
+          <option value="26">Balanced · CRF 26</option>
+          <option value="28">Smaller files · CRF 28</option>
+          <option value="30" selected>Strong compression · CRF 30</option>
+          <option value="32">Maximum reduction · CRF 32 · review text</option>
+        </select>
+      </div>
+      <div class="setting-group">
+        <label for="resolution">Output size</label>
+        <select id="resolution">
+          <option value="original" selected>Original resolution</option>
+          <option value="720p">720p · 1280 × 720</option>
+          <option value="1080p">1080p · 1920 × 1080</option>
+          <option value="1440p">1440p · QHD / 2K</option>
+        </select>
+      </div>
+      <div class="setting-note"><span class="check">✓</span> Selected size applied · frame rate retained</div>
+      <div class="setting-note"><span class="check">✓</span> Original files are never overwritten</div>
+    </section>
+    <p class="upscale-note">Upscaling is supported; it increases pixel dimensions but cannot restore detail absent from the source.</p>
+
+    <section class="queue-section">
+      <div class="section-heading">
+        <div><h3>Queue <span id="queueCount" class="count-badge">0</span></h3><p id="queueSummary">Add videos to get started</p></div>
+        <button id="clearQueue" class="text-button" disabled>Clear all</button>
+      </div>
+      <div id="queue" class="queue empty-queue">
+        <div class="empty-state">Your videos will appear here</div>
+      </div>
+    </section>
+
+    <footer class="bottom-bar">
+      <div class="destination">
+        <div class="folder-icon" aria-hidden="true">▰</div>
+        <div class="destination-text"><span>Save compressed videos to</span><strong id="outputPath">Choose an output folder</strong></div>
+        <button id="chooseFolder" class="button button-quiet">Choose folder</button>
+      </div>
+      <div class="actions">
+        <button id="cancel" class="button button-danger" hidden>Cancel</button>
+        <button id="start" class="button button-primary button-large" disabled><span class="play-icon">▶</span> Compress videos</button>
+      </div>
+    </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </main>
+  <script src="renderer.js"></script>
+</body>
+</html>
